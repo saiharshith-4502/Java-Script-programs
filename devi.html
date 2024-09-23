@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cost Estimation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+        form {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        select {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        label {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            margin: 50px auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>Cost Estimation</header>
+    <form>
+        <label for="crop">Select Crop:</label>
+        <select id="crop" name="crop">
+            <option value="wheat">Wheat</option>
+            <option value="rice">Rice</option>
+            <option value="maize">Maize</option>
+            <option value="cotton">Cotton</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="soybean">Soybean</option>
+            <option value="groundnut">Groundnut</option>
+            <option value="potato">Potato</option>
+            <option value="tomato">Tomato</option>
+            <option value="onion">Onion</option>
+            <option value="chilli">Chilli</option>
+            <option value="garlic">Garlic</option>
+            <option value="banana">Banana</option>
+            <option value="mango">Mango</option>
+        </select>
+        <button type="submit">Estimate Cost</button>
+    </form>
+    <h2>Cost Estimate for Selected Crop:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Cost (INR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Seed</td>
+                <td id="seed"></td>
+            </tr>
+            <tr>
+                <td>Fertilizer</td>
+                <td id="fertilizer"></td>
+            </tr>
+            <tr>
+                <td>Irrigation</td>
+                <td id="irrigation"></td>
+            </tr>
+            <tr>
+                <td>Labor</td>
+                <td id="labor"></td>
+            </tr>
+            <tr>
+                <td>Equipment</td>
+                <td id="equipment"></td>
+            </tr>
+            <tr>
+                <th>Total Cost</th>
+                <th id="total"></th>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        const cropSelect = document.getElementById("crop");
+        const seedCost = {
+            wheat: 1500,
+            rice: 2500,
+            maize: 1200,
+            cotton: 4000,
+            sugarcane: 3000,
+            soybean: 1800,
+            groundnut: 2200,
+            potato: 800,
+            tomato: 1200,
+            onion: 1000,
+            chilli: 1500,
+            garlic: 2000,
+            banana: 5000,
+            mango: 6000
+        };
+        const fertilizerCost = {
+            wheat: 2000,
+            rice: 3000,
+            maize: 1500,
+            cotton: 5000,
+            sugarcane: 4000,
+            soybean: 2500,
+            groundnut: 3000,
+            potato: 1200,
+            tomato: 1500,
+            onion: 1500,
+            chilli: 2000,
+            garlic: 2500,
+            banana: 6000,
+            mango: 7000
+        };
+        const irrigationCost = {
+            wheat: 1000,
+            rice: 1500,
+            maize: 800,
+            cotton: 3000,
+            sugarcane: 2500,
+            soybean: 1200,
+            groundnut: 1500,
+            potato: 500,
+            tomato: 800,
+            onion: 800,
+            chilli: 1000,
+            garlic: 1200,
+            banana: 3000,
+            mango: 4000
+        };
+        const laborCost = {
+            wheat: 5000,
+            rice: 8000,
+            maize: 4000,
+            cotton: 15000,
+            sugarcane: 12000,
+            soybean: 6000,
+            groundnut: 7000,
+            potato: 2000,
+            tomato: 2000,
+            onion: 2000,
+            chilli: 2500,
+            garlic: 3000,
+            banana: 8000,
+            mango: 10000
+        };
+        const equipmentCost = {
+            wheat: 10000,
+            rice: 15000,
+            maize: 8000,
+            cotton: 25000,
+            sugarcane: 20000,
+            soybean: 10000,
+            groundnut: 12000,
+            potato: 4000,
+            tomato: 6000,
+            onion: 6000,
+            chilli: 8000,
+            garlic: 10000,
+            banana: 20000,
+            mango: 25000
+        };
+        const form = document.getElementById("cost-form");
+        const seed = document.getElementById("seed");
+        const fertilizer = document.getElementById("fertilizer");
+        const irrigation = document.getElementById("irrigation");
+        const labor = document.getElementById("labor");
+        const equipment = document.getElementById("equipment");
+        const total = document.getElementById("total");
+        
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const crop = cropSelect.value;
+            seed.textContent = seedCost[crop];
+            fertilizer.textContent = fertilizerCost[crop];
+            irrigation.textContent = irrigationCost[crop];
+            labor.textContent = laborCost[crop];
+            equipment.textContent = equipmentCost[crop];
+            total.textContent = (seedCost[crop] + fertilizerCost[crop] + irrigationCost[crop] + laborCost[crop] + equipmentCost[crop]);
+        });
+    </script>
+</body>
+</html>
